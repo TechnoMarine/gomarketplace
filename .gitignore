@@ -1,0 +1,9 @@
+.swp
+config/production.yaml
+build/
+Godeps/
+!Godeps/Godeps.json
+go-gin-boilerplate
+./noteit-data
+noteit.exe
+.idea
