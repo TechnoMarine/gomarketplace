@@ -1,3 +1,11 @@
-drop table "follows";
-drop table "posts";
 drop table "users";
+drop table "categories";
+drop table "products";
+drop table "orders";
+drop table "order_details";
+drop table "reviews";
+drop table "shopping_cart";
+drop table "shipping_addresses";
+drop table "payments";
+drop table "discounts";
+DROP TYPE payment_status;
