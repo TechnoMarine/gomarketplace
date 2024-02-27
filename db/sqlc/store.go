@@ -32,30 +32,7 @@ func (store *Store) execTx(ctx context.Context, fn func(queries *Queries) error)
 	return tx.Commit()
 }
 
-type CreatePostTxParams struct {
-	Title  string `json:"title"`
-	Body   string `json:"body"`
-	UserId int32  `json:"user_id"`
-	Status string `json:"status"`
-}
-
 type CreateUserResult struct {
 	Id       int32  `json:"id"`
 	Username string `json:"username"`
-}
-
-func (store *Store) CreatePostTx(ctx context.Context, arg CreatePostTxParams) (Post, error) {
-	var err error
-	var post Post
-
-	err = store.execTx(ctx, func(queries *Queries) error {
-
-		post, err = store.CreatePost(ctx, CreatePostParams{Title: arg.Title, Body: arg.Body, Status: arg.Status, UserID: arg.UserId})
-		if err != nil {
-			fmt.Errorf("creating post error %v", err)
-		}
-		return nil
-	})
-
-	return post, err
 }
