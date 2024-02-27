@@ -1,6 +1,6 @@
 package server
 
-import "noteit/config"
+import "gomarketplace/config"
 
 func Init() {
 	conf := config.GetConfig()

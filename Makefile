@@ -49,10 +49,10 @@ dbstop:
 	@docker-compose stop db
 
 migrateup:
-	@migrate -path ./db/migration/ -database "postgresql://postgres:secret@localhost:12001/noteitdb?sslmode=disable" -verbose up
+	@migrate -path ./db/migration/ -database "postgresql://postgres:secret@localhost:12001/gomarketplacedb?sslmode=disable" -verbose up
 
 migratedown:
-	@migrate -path ./db/migration/ -database "postgresql://postgres:secret@localhost:12001/noteitdb?sslmode=disable" -verbose down
+	@migrate -path ./db/migration/ -database "postgresql://postgres:secret@localhost:12001/gomarketplacedb?sslmode=disable" -verbose down
 
 sqlc:
 	@sqlc generate

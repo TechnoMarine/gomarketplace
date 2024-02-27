@@ -5,13 +5,13 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: noteitdb
+      POSTGRES_DB: gomarketplacedb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
     ports:
       - 12001:5432
     volumes:
-      - ./noteit-data:/var/lib/postgresql
+      - ./gomarketplacedb-data:/var/lib/postgresql
 
 volumes:
   db:

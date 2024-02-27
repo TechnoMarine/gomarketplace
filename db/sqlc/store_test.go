@@ -3,10 +3,11 @@ package db
 import (
 	"context"
 	"fmt"
-	"github.com/stretchr/testify/require"
+	"gomarketplace/common"
 	"log"
-	"noteit/common"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestCreatePostTx(t *testing.T) {

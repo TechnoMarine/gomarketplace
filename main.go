@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"noteit/config"
-	"noteit/server"
+	"gomarketplace/config"
+	"gomarketplace/server"
 	"os"
 )
 

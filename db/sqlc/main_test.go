@@ -2,15 +2,16 @@ package db
 
 import (
 	"database/sql"
-	_ "github.com/lib/pq"
 	"log"
 	"os"
 	"testing"
+
+	_ "github.com/lib/pq"
 )
 
 const (
 	dbDriver = "postgres"
-	dbSource = "postgresql://postgres:secret@localhost:12001/noteitdb?sslmode=disable"
+	dbSource = "postgresql://postgres:secret@localhost:12001/gomarketplacedb?sslmode=disable"
 )
 
 var testQueries *Queries

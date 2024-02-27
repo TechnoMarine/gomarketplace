@@ -1,9 +1,10 @@
 package server
 
 import (
+	"gomarketplace/controllers"
+	"gomarketplace/middlewares"
+
 	"github.com/gin-gonic/gin"
-	"noteit/controllers"
-	"noteit/middlewares"
 )
 
 func NewRouter() *gin.Engine {

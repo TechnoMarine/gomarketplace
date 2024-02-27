@@ -1,6 +1,6 @@
 version: "2"
 cloud:
-  project: "noteit"
+  project: "gomarketplace"
 sql:
   - engine: "postgresql"
     queries: "./db/query"
