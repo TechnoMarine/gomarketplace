@@ -1,4 +1,4 @@
-module noteit
+module gomarketplace
 
 go 1.21
 
