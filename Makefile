@@ -29,7 +29,7 @@ deps:
 .PHONY: test
 ## test: Run tests with verbose mode
 test:
-	@go test -v ./tests/*
+	@go test -v -cover ./...
 
 .PHONY: help
 all: help
