@@ -36,3 +36,19 @@ type CreateUserResult struct {
 	Id       int32  `json:"id"`
 	Username string `json:"username"`
 }
+
+func (store *Store) CreateProductTx(ctx context.Context, arg CreateProductParams) (Product, error) {
+	var err error
+	var post Product
+
+	err = store.execTx(ctx, func(queries *Queries) error {
+
+		post, err = store.CreateProductTx(ctx, arg)
+		if err != nil {
+			fmt.Errorf("creating post error %v", err)
+		}
+		return nil
+	})
+
+	return post, err
+}

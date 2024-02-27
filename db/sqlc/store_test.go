@@ -30,6 +30,8 @@ func TestCreateProductTx(t *testing.T) {
 
 	user, err := testQueries.CreateUser(context.Background(), createUserArg)
 	if err != nil {
+		fmt.Print(err)
+
 		log.Fatal("User doesnt create")
 	}
 
@@ -55,17 +57,46 @@ func TestCreateProductTx(t *testing.T) {
 	}
 
 	errs := make(chan error)
-	results := make(chan Post)
+	results := make(chan Product)
 
 	for i := 0; i < n; i++ {
 		go func() {
-			args := CreatePostTxParams{
-				Title:  common.GetRandomArticleName(),
-				Body:   common.GetTextMock(),
-				UserId: user.ID,
-				Status: common.GetRandomStatuses(),
+			args := CreateProductParams{
+				Name: sql.NullString{String: common.GetRandomName(), Valid: true},
+				Description: sql.NullString{
+					String: common.GetTextMock(),
+					Valid:  true,
+				},
+				Price: sql.NullString{
+					String: "20.00",
+					Valid:  true,
+				},
+				StockQuantity: sql.NullInt32{
+					Int32: 2,
+					Valid: true,
+				},
+				SellerID: sql.NullInt32{
+					Int32: user.UserID,
+					Valid: true,
+				},
+				CategoryID: sql.NullInt32{
+					Int32: category.CategoryID,
+					Valid: true,
+				},
+				IsActive: sql.NullBool{
+					Bool:  true,
+					Valid: true,
+				},
+				CreatedAt: sql.NullTime{
+					Time:  time.Time{},
+					Valid: true,
+				},
+				UpdatedAt: sql.NullTime{
+					Time:  time.Time{},
+					Valid: false,
+				},
 			}
-			result, err := store.CreatePostTx(context.Background(), args)
+			result, err := store.CreateProductTx(context.Background(), args)
 
 			errs <- err
 			results <- result
