@@ -24,6 +24,8 @@ jobs:
           POSTGRES_PASSWORD: secret
           POSTGRES_USER: postgres
           POSTGRES_DB: gomarketplacedb
+        ports:
+          - 12001:5432
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -40,10 +42,10 @@ jobs:
           go-version: '1.20'
 
       - name: Install migrate
-        run: curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.linux-amd64.tar.gz | tar xvz
-
-      - name: Install sqlc
-        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+        run: |
+          curl -L https://github.com/golang-migrate/migrate/releases/download/v4.17.0/migrate.linux-amd64.tar.gz | tar xvz
+          mv migrate.linux-amd64 /usr/bin/migrate
+          which migrate
 
       - name: Run migrations
         run: make migrateup
