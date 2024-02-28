@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createPayment = `-- name: CreatePayment :one
@@ -17,12 +18,12 @@ RETURNING payment_id, order_id, amount, status, payment_date, created_at, update
 `
 
 type CreatePaymentParams struct {
-	OrderID     sql.NullInt32     `json:"order_id"`
-	Amount      sql.NullString    `json:"amount"`
-	Status      NullPaymentStatus `json:"status"`
-	PaymentDate sql.NullTime      `json:"payment_date"`
-	CreatedAt   sql.NullTime      `json:"created_at"`
-	UpdatedAt   sql.NullTime      `json:"updated_at"`
+	OrderID     int32         `json:"order_id"`
+	Amount      string        `json:"amount"`
+	Status      PaymentStatus `json:"status"`
+	PaymentDate time.Time     `json:"payment_date"`
+	CreatedAt   time.Time     `json:"created_at"`
+	UpdatedAt   sql.NullTime  `json:"updated_at"`
 }
 
 func (q *Queries) CreatePayment(ctx context.Context, arg CreatePaymentParams) (Payment, error) {
@@ -130,12 +131,12 @@ RETURNING payment_id, order_id, amount, status, payment_date, created_at, update
 `
 
 type UpdatePaymentParams struct {
-	OrderID     sql.NullInt32     `json:"order_id"`
-	Amount      sql.NullString    `json:"amount"`
-	Status      NullPaymentStatus `json:"status"`
-	PaymentDate sql.NullTime      `json:"payment_date"`
-	UpdatedAt   sql.NullTime      `json:"updated_at"`
-	PaymentID   int32             `json:"payment_id"`
+	OrderID     int32         `json:"order_id"`
+	Amount      string        `json:"amount"`
+	Status      PaymentStatus `json:"status"`
+	PaymentDate time.Time     `json:"payment_date"`
+	UpdatedAt   sql.NullTime  `json:"updated_at"`
+	PaymentID   int32         `json:"payment_id"`
 }
 
 func (q *Queries) UpdatePayment(ctx context.Context, arg UpdatePaymentParams) (Payment, error) {

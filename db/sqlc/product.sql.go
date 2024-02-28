@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createProduct = `-- name: CreateProduct :one
@@ -17,15 +18,15 @@ RETURNING product_id, name, description, price, stock_quantity, seller_id, categ
 `
 
 type CreateProductParams struct {
-	Name          sql.NullString `json:"name"`
-	Description   sql.NullString `json:"description"`
-	Price         sql.NullString `json:"price"`
-	StockQuantity sql.NullInt32  `json:"stock_quantity"`
-	SellerID      sql.NullInt32  `json:"seller_id"`
-	CategoryID    sql.NullInt32  `json:"category_id"`
-	IsActive      sql.NullBool   `json:"is_active"`
-	CreatedAt     sql.NullTime   `json:"created_at"`
-	UpdatedAt     sql.NullTime   `json:"updated_at"`
+	Name          string       `json:"name"`
+	Description   string       `json:"description"`
+	Price         string       `json:"price"`
+	StockQuantity int32        `json:"stock_quantity"`
+	SellerID      int32        `json:"seller_id"`
+	CategoryID    int32        `json:"category_id"`
+	IsActive      bool         `json:"is_active"`
+	CreatedAt     time.Time    `json:"created_at"`
+	UpdatedAt     sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateProduct(ctx context.Context, arg CreateProductParams) (Product, error) {
@@ -145,15 +146,15 @@ RETURNING product_id, name, description, price, stock_quantity, seller_id, categ
 `
 
 type UpdateProductParams struct {
-	Name          sql.NullString `json:"name"`
-	Description   sql.NullString `json:"description"`
-	Price         sql.NullString `json:"price"`
-	StockQuantity sql.NullInt32  `json:"stock_quantity"`
-	SellerID      sql.NullInt32  `json:"seller_id"`
-	CategoryID    sql.NullInt32  `json:"category_id"`
-	IsActive      sql.NullBool   `json:"is_active"`
-	UpdatedAt     sql.NullTime   `json:"updated_at"`
-	ProductID     int32          `json:"product_id"`
+	Name          string       `json:"name"`
+	Description   string       `json:"description"`
+	Price         string       `json:"price"`
+	StockQuantity int32        `json:"stock_quantity"`
+	SellerID      int32        `json:"seller_id"`
+	CategoryID    int32        `json:"category_id"`
+	IsActive      bool         `json:"is_active"`
+	UpdatedAt     sql.NullTime `json:"updated_at"`
+	ProductID     int32        `json:"product_id"`
 }
 
 func (q *Queries) UpdateProduct(ctx context.Context, arg UpdateProductParams) (Product, error) {

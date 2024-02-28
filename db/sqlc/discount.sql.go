@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createDiscount = `-- name: CreateDiscount :one
@@ -17,10 +18,10 @@ RETURNING discount_id, product_id, discount_percentage, created_at, updated_at
 `
 
 type CreateDiscountParams struct {
-	ProductID          sql.NullInt32  `json:"product_id"`
-	DiscountPercentage sql.NullString `json:"discount_percentage"`
-	CreatedAt          sql.NullTime   `json:"created_at"`
-	UpdatedAt          sql.NullTime   `json:"updated_at"`
+	ProductID          int32        `json:"product_id"`
+	DiscountPercentage string       `json:"discount_percentage"`
+	CreatedAt          time.Time    `json:"created_at"`
+	UpdatedAt          sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateDiscount(ctx context.Context, arg CreateDiscountParams) (Discount, error) {
@@ -120,10 +121,10 @@ RETURNING discount_id, product_id, discount_percentage, created_at, updated_at
 `
 
 type UpdateDiscountParams struct {
-	ProductID          sql.NullInt32  `json:"product_id"`
-	DiscountPercentage sql.NullString `json:"discount_percentage"`
-	UpdatedAt          sql.NullTime   `json:"updated_at"`
-	DiscountID         int32          `json:"discount_id"`
+	ProductID          int32        `json:"product_id"`
+	DiscountPercentage string       `json:"discount_percentage"`
+	UpdatedAt          sql.NullTime `json:"updated_at"`
+	DiscountID         int32        `json:"discount_id"`
 }
 
 func (q *Queries) UpdateDiscount(ctx context.Context, arg UpdateDiscountParams) (Discount, error) {

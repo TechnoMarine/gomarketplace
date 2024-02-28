@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createOrder = `-- name: CreateOrder :one
@@ -17,10 +18,10 @@ RETURNING order_id, order_date, buyer_id, created_at, updated_at
 `
 
 type CreateOrderParams struct {
-	OrderDate sql.NullTime  `json:"order_date"`
-	BuyerID   sql.NullInt32 `json:"buyer_id"`
-	CreatedAt sql.NullTime  `json:"created_at"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
+	OrderDate time.Time    `json:"order_date"`
+	BuyerID   int32        `json:"buyer_id"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order, error) {
@@ -120,10 +121,10 @@ RETURNING order_id, order_date, buyer_id, created_at, updated_at
 `
 
 type UpdateOrderParams struct {
-	OrderDate sql.NullTime  `json:"order_date"`
-	BuyerID   sql.NullInt32 `json:"buyer_id"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
-	OrderID   int32         `json:"order_id"`
+	OrderDate time.Time    `json:"order_date"`
+	BuyerID   int32        `json:"buyer_id"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
+	OrderID   int32        `json:"order_id"`
 }
 
 func (q *Queries) UpdateOrder(ctx context.Context, arg UpdateOrderParams) (Order, error) {

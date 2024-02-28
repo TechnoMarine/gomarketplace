@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createShoppingCart = `-- name: CreateShoppingCart :one
@@ -17,11 +18,11 @@ RETURNING cart_id, user_id, product_id, quantity, created_at, updated_at
 `
 
 type CreateShoppingCartParams struct {
-	UserID    sql.NullInt32 `json:"user_id"`
-	ProductID sql.NullInt32 `json:"product_id"`
-	Quantity  sql.NullInt32 `json:"quantity"`
-	CreatedAt sql.NullTime  `json:"created_at"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
+	UserID    int32        `json:"user_id"`
+	ProductID int32        `json:"product_id"`
+	Quantity  int32        `json:"quantity"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateShoppingCart(ctx context.Context, arg CreateShoppingCartParams) (ShoppingCart, error) {
@@ -125,11 +126,11 @@ RETURNING cart_id, user_id, product_id, quantity, created_at, updated_at
 `
 
 type UpdateShoppingCartParams struct {
-	UserID    sql.NullInt32 `json:"user_id"`
-	ProductID sql.NullInt32 `json:"product_id"`
-	Quantity  sql.NullInt32 `json:"quantity"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
-	CartID    int32         `json:"cart_id"`
+	UserID    int32        `json:"user_id"`
+	ProductID int32        `json:"product_id"`
+	Quantity  int32        `json:"quantity"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
+	CartID    int32        `json:"cart_id"`
 }
 
 func (q *Queries) UpdateShoppingCart(ctx context.Context, arg UpdateShoppingCartParams) (ShoppingCart, error) {

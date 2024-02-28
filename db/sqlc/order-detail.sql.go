@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createOrderDetail = `-- name: CreateOrderDetail :one
@@ -17,12 +18,12 @@ RETURNING detail_id, order_id, product_id, quantity, total_amount, created_at, u
 `
 
 type CreateOrderDetailParams struct {
-	OrderID     sql.NullInt32  `json:"order_id"`
-	ProductID   sql.NullInt32  `json:"product_id"`
-	Quantity    sql.NullInt32  `json:"quantity"`
-	TotalAmount sql.NullString `json:"total_amount"`
-	CreatedAt   sql.NullTime   `json:"created_at"`
-	UpdatedAt   sql.NullTime   `json:"updated_at"`
+	OrderID     int32        `json:"order_id"`
+	ProductID   int32        `json:"product_id"`
+	Quantity    int32        `json:"quantity"`
+	TotalAmount string       `json:"total_amount"`
+	CreatedAt   time.Time    `json:"created_at"`
+	UpdatedAt   sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateOrderDetail(ctx context.Context, arg CreateOrderDetailParams) (OrderDetail, error) {
@@ -130,12 +131,12 @@ RETURNING detail_id, order_id, product_id, quantity, total_amount, created_at, u
 `
 
 type UpdateOrderDetailParams struct {
-	OrderID     sql.NullInt32  `json:"order_id"`
-	ProductID   sql.NullInt32  `json:"product_id"`
-	Quantity    sql.NullInt32  `json:"quantity"`
-	TotalAmount sql.NullString `json:"total_amount"`
-	UpdatedAt   sql.NullTime   `json:"updated_at"`
-	DetailID    int32          `json:"detail_id"`
+	OrderID     int32        `json:"order_id"`
+	ProductID   int32        `json:"product_id"`
+	Quantity    int32        `json:"quantity"`
+	TotalAmount string       `json:"total_amount"`
+	UpdatedAt   sql.NullTime `json:"updated_at"`
+	DetailID    int32        `json:"detail_id"`
 }
 
 func (q *Queries) UpdateOrderDetail(ctx context.Context, arg UpdateOrderDetailParams) (OrderDetail, error) {

@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createReview = `-- name: CreateReview :one
@@ -17,11 +18,11 @@ RETURNING review_id, product_id, user_id, rating, comment, created_at, updated_a
 `
 
 type CreateReviewParams struct {
-	ProductID sql.NullInt32  `json:"product_id"`
-	UserID    sql.NullInt32  `json:"user_id"`
-	Rating    sql.NullInt32  `json:"rating"`
+	ProductID int32          `json:"product_id"`
+	UserID    int32          `json:"user_id"`
+	Rating    int32          `json:"rating"`
 	Comment   sql.NullString `json:"comment"`
-	CreatedAt sql.NullTime   `json:"created_at"`
+	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt sql.NullTime   `json:"updated_at"`
 }
 
@@ -130,9 +131,9 @@ RETURNING review_id, product_id, user_id, rating, comment, created_at, updated_a
 `
 
 type UpdateReviewParams struct {
-	ProductID sql.NullInt32  `json:"product_id"`
-	UserID    sql.NullInt32  `json:"user_id"`
-	Rating    sql.NullInt32  `json:"rating"`
+	ProductID int32          `json:"product_id"`
+	UserID    int32          `json:"user_id"`
+	Rating    int32          `json:"rating"`
 	Comment   sql.NullString `json:"comment"`
 	UpdatedAt sql.NullTime   `json:"updated_at"`
 	ReviewID  int32          `json:"review_id"`

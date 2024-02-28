@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createUser = `-- name: CreateUser :one
@@ -17,14 +18,14 @@ RETURNING user_id, first_name, last_name, sur_name, email, password, address, cr
 `
 
 type CreateUserParams struct {
-	FirstName sql.NullString `json:"first_name"`
-	LastName  sql.NullString `json:"last_name"`
-	SurName   sql.NullString `json:"sur_name"`
-	Email     sql.NullString `json:"email"`
-	Password  sql.NullString `json:"password"`
-	Address   sql.NullString `json:"address"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
+	FirstName string       `json:"first_name"`
+	LastName  string       `json:"last_name"`
+	SurName   string       `json:"sur_name"`
+	Email     string       `json:"email"`
+	Password  string       `json:"password"`
+	Address   string       `json:"address"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
@@ -165,13 +166,13 @@ returning user_id, first_name, last_name, sur_name, email, password, address, cr
 `
 
 type UpdateUserParams struct {
-	FirstName sql.NullString `json:"first_name"`
-	LastName  sql.NullString `json:"last_name"`
-	SurName   sql.NullString `json:"sur_name"`
-	Email     sql.NullString `json:"email"`
-	Password  sql.NullString `json:"password"`
-	Address   sql.NullString `json:"address"`
-	UserID    int32          `json:"user_id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	SurName   string `json:"sur_name"`
+	Email     string `json:"email"`
+	Password  string `json:"password"`
+	Address   string `json:"address"`
+	UserID    int32  `json:"user_id"`
 }
 
 func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error) {

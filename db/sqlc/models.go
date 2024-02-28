@@ -8,6 +8,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"fmt"
+	"time"
 )
 
 type PaymentStatus string
@@ -55,97 +56,97 @@ func (ns NullPaymentStatus) Value() (driver.Value, error) {
 }
 
 type Category struct {
-	CategoryID   int32          `json:"category_id"`
-	CategoryName sql.NullString `json:"category_name"`
-	ParentID     sql.NullInt32  `json:"parent_id"`
-	CreatedAt    sql.NullTime   `json:"created_at"`
-	UpdatedAt    sql.NullTime   `json:"updated_at"`
+	CategoryID   int32         `json:"category_id"`
+	CategoryName string        `json:"category_name"`
+	ParentID     sql.NullInt32 `json:"parent_id"`
+	CreatedAt    time.Time     `json:"created_at"`
+	UpdatedAt    sql.NullTime  `json:"updated_at"`
 }
 
 type Discount struct {
-	DiscountID         int32          `json:"discount_id"`
-	ProductID          sql.NullInt32  `json:"product_id"`
-	DiscountPercentage sql.NullString `json:"discount_percentage"`
-	CreatedAt          sql.NullTime   `json:"created_at"`
-	UpdatedAt          sql.NullTime   `json:"updated_at"`
+	DiscountID         int32        `json:"discount_id"`
+	ProductID          int32        `json:"product_id"`
+	DiscountPercentage string       `json:"discount_percentage"`
+	CreatedAt          time.Time    `json:"created_at"`
+	UpdatedAt          sql.NullTime `json:"updated_at"`
 }
 
 type Order struct {
-	OrderID   int32         `json:"order_id"`
-	OrderDate sql.NullTime  `json:"order_date"`
-	BuyerID   sql.NullInt32 `json:"buyer_id"`
-	CreatedAt sql.NullTime  `json:"created_at"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
+	OrderID   int32        `json:"order_id"`
+	OrderDate time.Time    `json:"order_date"`
+	BuyerID   int32        `json:"buyer_id"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 type OrderDetail struct {
-	DetailID    int32          `json:"detail_id"`
-	OrderID     sql.NullInt32  `json:"order_id"`
-	ProductID   sql.NullInt32  `json:"product_id"`
-	Quantity    sql.NullInt32  `json:"quantity"`
-	TotalAmount sql.NullString `json:"total_amount"`
-	CreatedAt   sql.NullTime   `json:"created_at"`
-	UpdatedAt   sql.NullTime   `json:"updated_at"`
+	DetailID    int32        `json:"detail_id"`
+	OrderID     int32        `json:"order_id"`
+	ProductID   int32        `json:"product_id"`
+	Quantity    int32        `json:"quantity"`
+	TotalAmount string       `json:"total_amount"`
+	CreatedAt   time.Time    `json:"created_at"`
+	UpdatedAt   sql.NullTime `json:"updated_at"`
 }
 
 type Payment struct {
-	PaymentID   int32             `json:"payment_id"`
-	OrderID     sql.NullInt32     `json:"order_id"`
-	Amount      sql.NullString    `json:"amount"`
-	Status      NullPaymentStatus `json:"status"`
-	PaymentDate sql.NullTime      `json:"payment_date"`
-	CreatedAt   sql.NullTime      `json:"created_at"`
-	UpdatedAt   sql.NullTime      `json:"updated_at"`
+	PaymentID   int32         `json:"payment_id"`
+	OrderID     int32         `json:"order_id"`
+	Amount      string        `json:"amount"`
+	Status      PaymentStatus `json:"status"`
+	PaymentDate time.Time     `json:"payment_date"`
+	CreatedAt   time.Time     `json:"created_at"`
+	UpdatedAt   sql.NullTime  `json:"updated_at"`
 }
 
 type Product struct {
-	ProductID     int32          `json:"product_id"`
-	Name          sql.NullString `json:"name"`
-	Description   sql.NullString `json:"description"`
-	Price         sql.NullString `json:"price"`
-	StockQuantity sql.NullInt32  `json:"stock_quantity"`
-	SellerID      sql.NullInt32  `json:"seller_id"`
-	CategoryID    sql.NullInt32  `json:"category_id"`
-	IsActive      sql.NullBool   `json:"is_active"`
-	CreatedAt     sql.NullTime   `json:"created_at"`
-	UpdatedAt     sql.NullTime   `json:"updated_at"`
+	ProductID     int32        `json:"product_id"`
+	Name          string       `json:"name"`
+	Description   string       `json:"description"`
+	Price         string       `json:"price"`
+	StockQuantity int32        `json:"stock_quantity"`
+	SellerID      int32        `json:"seller_id"`
+	CategoryID    int32        `json:"category_id"`
+	IsActive      bool         `json:"is_active"`
+	CreatedAt     time.Time    `json:"created_at"`
+	UpdatedAt     sql.NullTime `json:"updated_at"`
 }
 
 type Review struct {
 	ReviewID  int32          `json:"review_id"`
-	ProductID sql.NullInt32  `json:"product_id"`
-	UserID    sql.NullInt32  `json:"user_id"`
-	Rating    sql.NullInt32  `json:"rating"`
+	ProductID int32          `json:"product_id"`
+	UserID    int32          `json:"user_id"`
+	Rating    int32          `json:"rating"`
 	Comment   sql.NullString `json:"comment"`
-	CreatedAt sql.NullTime   `json:"created_at"`
+	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt sql.NullTime   `json:"updated_at"`
 }
 
 type ShippingAddress struct {
-	AddressID int32          `json:"address_id"`
-	UserID    sql.NullInt32  `json:"user_id"`
-	Address   sql.NullString `json:"address"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
+	AddressID int32        `json:"address_id"`
+	UserID    int32        `json:"user_id"`
+	Address   string       `json:"address"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 type ShoppingCart struct {
-	CartID    int32         `json:"cart_id"`
-	UserID    sql.NullInt32 `json:"user_id"`
-	ProductID sql.NullInt32 `json:"product_id"`
-	Quantity  sql.NullInt32 `json:"quantity"`
-	CreatedAt sql.NullTime  `json:"created_at"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
+	CartID    int32        `json:"cart_id"`
+	UserID    int32        `json:"user_id"`
+	ProductID int32        `json:"product_id"`
+	Quantity  int32        `json:"quantity"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 type User struct {
-	UserID    int32          `json:"user_id"`
-	FirstName sql.NullString `json:"first_name"`
-	LastName  sql.NullString `json:"last_name"`
-	SurName   sql.NullString `json:"sur_name"`
-	Email     sql.NullString `json:"email"`
-	Password  sql.NullString `json:"password"`
-	Address   sql.NullString `json:"address"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
+	UserID    int32        `json:"user_id"`
+	FirstName string       `json:"first_name"`
+	LastName  string       `json:"last_name"`
+	SurName   string       `json:"sur_name"`
+	Email     string       `json:"email"`
+	Password  string       `json:"password"`
+	Address   string       `json:"address"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }

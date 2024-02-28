@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createShippingAddress = `-- name: CreateShippingAddress :one
@@ -17,10 +18,10 @@ RETURNING address_id, user_id, address, created_at, updated_at
 `
 
 type CreateShippingAddressParams struct {
-	UserID    sql.NullInt32  `json:"user_id"`
-	Address   sql.NullString `json:"address"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
+	UserID    int32        `json:"user_id"`
+	Address   string       `json:"address"`
+	CreatedAt time.Time    `json:"created_at"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
 }
 
 func (q *Queries) CreateShippingAddress(ctx context.Context, arg CreateShippingAddressParams) (ShippingAddress, error) {
@@ -120,10 +121,10 @@ RETURNING address_id, user_id, address, created_at, updated_at
 `
 
 type UpdateShippingAddressParams struct {
-	UserID    sql.NullInt32  `json:"user_id"`
-	Address   sql.NullString `json:"address"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
-	AddressID int32          `json:"address_id"`
+	UserID    int32        `json:"user_id"`
+	Address   string       `json:"address"`
+	UpdatedAt sql.NullTime `json:"updated_at"`
+	AddressID int32        `json:"address_id"`
 }
 
 func (q *Queries) UpdateShippingAddress(ctx context.Context, arg UpdateShippingAddressParams) (ShippingAddress, error) {

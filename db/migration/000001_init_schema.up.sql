@@ -2,97 +2,97 @@ CREATE TYPE payment_status AS ENUM ('SUCCESS', 'ERROR', 'WAITING', 'CANCELED');
 
 CREATE TABLE "users" (
                          "user_id" serial PRIMARY KEY,
-                         "first_name" varchar,
-                         "last_name" varchar,
-                         "sur_name" varchar,
-                         "email" varchar,
-                         "password" varchar,
-                         "address" varchar,
-                         "created_at" timestamp,
+                         "first_name" varchar not null,
+                         "last_name" varchar not null,
+                         "sur_name" varchar not null,
+                         "email" varchar not null,
+                         "password" varchar not null,
+                         "address" varchar not null,
+                         "created_at" timestamp not null,
                          "updated_at" timestamp
 );
 
 CREATE TABLE "categories" (
                               "category_id" serial PRIMARY KEY,
-                              "category_name" varchar,
+                              "category_name" varchar not null,
                               "parent_id" int,
-                              "created_at" timestamp,
+                              "created_at" timestamp not null,
                               "updated_at" timestamp
 );
 
 CREATE TABLE "products" (
                             "product_id" serial PRIMARY KEY,
-                            "name" varchar,
-                            "description" text,
-                            "price" decimal,
-                            "stock_quantity" int,
-                            "seller_id" int,
-                            "category_id" int,
-                            "is_active" boolean,
-                            "created_at" timestamp,
+                            "name" varchar not null,
+                            "description" text not null,
+                            "price" decimal not null,
+                            "stock_quantity" int not null,
+                            "seller_id" int not null,
+                            "category_id" int not null,
+                            "is_active" boolean not null,
+                            "created_at" timestamp not null,
                             "updated_at" timestamp
 );
 
 CREATE TABLE "orders" (
                           "order_id" serial PRIMARY KEY,
-                          "order_date" date,
-                          "buyer_id" int,
-                          "created_at" timestamp,
+                          "order_date" date not null,
+                          "buyer_id" int not null,
+                          "created_at" timestamp not null,
                           "updated_at" timestamp
 );
 
 CREATE TABLE "order_details" (
                                  "detail_id" serial PRIMARY KEY,
-                                 "order_id" integer,
-                                 "product_id" int,
-                                 "quantity" int,
-                                 "total_amount" decimal,
-                                 "created_at" timestamp,
+                                 "order_id" integer not null,
+                                 "product_id" int not null,
+                                 "quantity" int not null,
+                                 "total_amount" decimal not null,
+                                 "created_at" timestamp not null,
                                  "updated_at" timestamp
 );
 
 CREATE TABLE "reviews" (
                            "review_id" serial PRIMARY KEY,
-                           "product_id" int,
-                           "user_id" int,
-                           "rating" int,
+                           "product_id" int not null,
+                           "user_id" int not null,
+                           "rating" int not null,
                            "comment" text,
-                           "created_at" timestamp,
+                           "created_at" timestamp not null,
                            "updated_at" timestamp
 );
 
 CREATE TABLE "shopping_cart" (
                                  "cart_id" serial PRIMARY KEY,
-                                 "user_id" int,
-                                 "product_id" int,
-                                 "quantity" int,
-                                 "created_at" timestamp,
+                                 "user_id" int not null,
+                                 "product_id" int not null,
+                                 "quantity" int not null,
+                                 "created_at" timestamp not null,
                                  "updated_at" timestamp
 );
 
 CREATE TABLE "shipping_addresses" (
                                       "address_id" serial PRIMARY KEY,
-                                      "user_id" int,
-                                      "address" varchar,
-                                      "created_at" timestamp,
+                                      "user_id" int not null,
+                                      "address" varchar not null,
+                                      "created_at" timestamp not null,
                                       "updated_at" timestamp
 );
 
 CREATE TABLE "payments" (
                             "payment_id" serial PRIMARY KEY,
-                            "order_id" int,
-                            "amount" decimal,
-                            "status" payment_status,
-                            "payment_date" date,
-                            "created_at" timestamp,
+                            "order_id" int not null,
+                            "amount" decimal not null,
+                            "status" payment_status not null,
+                            "payment_date" date not null,
+                            "created_at" timestamp not null,
                             "updated_at" timestamp
 );
 
 CREATE TABLE "discounts" (
                              "discount_id" serial PRIMARY KEY,
-                             "product_id" int,
-                             "discount_percentage" decimal,
-                             "created_at" timestamp,
+                             "product_id" int not null,
+                             "discount_percentage" decimal not null,
+                             "created_at" timestamp not null,
                              "updated_at" timestamp
 );
 

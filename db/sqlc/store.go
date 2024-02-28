@@ -32,11 +32,6 @@ func (store *Store) execTx(ctx context.Context, fn func(queries *Queries) error)
 	return tx.Commit()
 }
 
-type CreateUserResult struct {
-	Id       int32  `json:"id"`
-	Username string `json:"username"`
-}
-
 func (store *Store) CreateProductTx(ctx context.Context, arg CreateProductParams) (Product, error) {
 	var err error
 	var post Product

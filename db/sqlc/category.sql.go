@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createCategory = `-- name: CreateCategory :one
@@ -17,10 +18,10 @@ RETURNING category_id, category_name, parent_id, created_at, updated_at
 `
 
 type CreateCategoryParams struct {
-	CategoryName sql.NullString `json:"category_name"`
-	ParentID     sql.NullInt32  `json:"parent_id"`
-	CreatedAt    sql.NullTime   `json:"created_at"`
-	UpdatedAt    sql.NullTime   `json:"updated_at"`
+	CategoryName string        `json:"category_name"`
+	ParentID     sql.NullInt32 `json:"parent_id"`
+	CreatedAt    time.Time     `json:"created_at"`
+	UpdatedAt    sql.NullTime  `json:"updated_at"`
 }
 
 func (q *Queries) CreateCategory(ctx context.Context, arg CreateCategoryParams) (Category, error) {
@@ -120,10 +121,10 @@ RETURNING category_id, category_name, parent_id, created_at, updated_at
 `
 
 type UpdateCategoryParams struct {
-	CategoryName sql.NullString `json:"category_name"`
-	ParentID     sql.NullInt32  `json:"parent_id"`
-	UpdatedAt    sql.NullTime   `json:"updated_at"`
-	CategoryID   int32          `json:"category_id"`
+	CategoryName string        `json:"category_name"`
+	ParentID     sql.NullInt32 `json:"parent_id"`
+	UpdatedAt    sql.NullTime  `json:"updated_at"`
+	CategoryID   int32         `json:"category_id"`
 }
 
 func (q *Queries) UpdateCategory(ctx context.Context, arg UpdateCategoryParams) (Category, error) {

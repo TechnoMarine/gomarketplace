@@ -3,8 +3,9 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/vsouza/go-gin-boilerplate/server"
 	"gomarketplace/config"
-	"gomarketplace/server"
+	//"gomarketplace/server"
 	"os"
 )
 
