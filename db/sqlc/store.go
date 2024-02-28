@@ -43,7 +43,7 @@ func (store *Store) CreateProductTx(ctx context.Context, arg CreateProductParams
 
 	err = store.execTx(ctx, func(queries *Queries) error {
 
-		post, err = store.CreateProductTx(ctx, arg)
+		post, err = store.CreateProduct(ctx, arg)
 		if err != nil {
 			fmt.Errorf("creating post error %v", err)
 		}

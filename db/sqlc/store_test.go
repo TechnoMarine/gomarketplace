@@ -32,7 +32,7 @@ func TestCreateProductTx(t *testing.T) {
 	if err != nil {
 		fmt.Print(err)
 
-		log.Fatal("User doesnt create")
+		log.Fatal("User doesn't create")
 	}
 
 	createCategotyArg := CreateCategoryParams{

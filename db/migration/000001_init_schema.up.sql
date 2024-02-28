@@ -1,7 +1,7 @@
 CREATE TYPE payment_status AS ENUM ('SUCCESS', 'ERROR', 'WAITING', 'CANCELED');
 
 CREATE TABLE "users" (
-                         "user_id" bigserial PRIMARY KEY,
+                         "user_id" serial PRIMARY KEY,
                          "first_name" varchar,
                          "last_name" varchar,
                          "sur_name" varchar,
@@ -13,7 +13,7 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "categories" (
-                              "category_id" bigserial PRIMARY KEY,
+                              "category_id" serial PRIMARY KEY,
                               "category_name" varchar,
                               "parent_id" int,
                               "created_at" timestamp,
@@ -21,7 +21,7 @@ CREATE TABLE "categories" (
 );
 
 CREATE TABLE "products" (
-                            "product_id" bigserial PRIMARY KEY,
+                            "product_id" serial PRIMARY KEY,
                             "name" varchar,
                             "description" text,
                             "price" decimal,
@@ -34,7 +34,7 @@ CREATE TABLE "products" (
 );
 
 CREATE TABLE "orders" (
-                          "order_id" bigserial PRIMARY KEY,
+                          "order_id" serial PRIMARY KEY,
                           "order_date" date,
                           "buyer_id" int,
                           "created_at" timestamp,
@@ -42,8 +42,8 @@ CREATE TABLE "orders" (
 );
 
 CREATE TABLE "order_details" (
-                                 "detail_id" bigserial PRIMARY KEY,
-                                 "order_id" int,
+                                 "detail_id" serial PRIMARY KEY,
+                                 "order_id" integer,
                                  "product_id" int,
                                  "quantity" int,
                                  "total_amount" decimal,
@@ -52,7 +52,7 @@ CREATE TABLE "order_details" (
 );
 
 CREATE TABLE "reviews" (
-                           "review_id" bigserial PRIMARY KEY,
+                           "review_id" serial PRIMARY KEY,
                            "product_id" int,
                            "user_id" int,
                            "rating" int,
@@ -62,7 +62,7 @@ CREATE TABLE "reviews" (
 );
 
 CREATE TABLE "shopping_cart" (
-                                 "cart_id" bigserial PRIMARY KEY,
+                                 "cart_id" serial PRIMARY KEY,
                                  "user_id" int,
                                  "product_id" int,
                                  "quantity" int,
@@ -71,7 +71,7 @@ CREATE TABLE "shopping_cart" (
 );
 
 CREATE TABLE "shipping_addresses" (
-                                      "address_id" bigserial PRIMARY KEY,
+                                      "address_id" serial PRIMARY KEY,
                                       "user_id" int,
                                       "address" varchar,
                                       "created_at" timestamp,
@@ -79,7 +79,7 @@ CREATE TABLE "shipping_addresses" (
 );
 
 CREATE TABLE "payments" (
-                            "payment_id" bigserial PRIMARY KEY,
+                            "payment_id" serial PRIMARY KEY,
                             "order_id" int,
                             "amount" decimal,
                             "status" payment_status,
@@ -89,7 +89,7 @@ CREATE TABLE "payments" (
 );
 
 CREATE TABLE "discounts" (
-                             "discount_id" bigserial PRIMARY KEY,
+                             "discount_id" serial PRIMARY KEY,
                              "product_id" int,
                              "discount_percentage" decimal,
                              "created_at" timestamp,

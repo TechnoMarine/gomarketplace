@@ -1,6 +1,6 @@
 drop table "categories";
-drop table "orders";
 drop table "order_details";
+drop table "orders";
 drop table "reviews";
 drop table "shopping_cart";
 drop table "shipping_addresses";
