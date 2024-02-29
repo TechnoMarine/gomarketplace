@@ -96,6 +96,8 @@ CREATE TABLE "discounts" (
                              "updated_at" timestamp
 );
 
+CREATE UNIQUE INDEX email_unique ON users (email);
+
 ALTER TABLE "categories" ADD FOREIGN KEY ("parent_id") REFERENCES "categories" ("category_id");
 
 ALTER TABLE "products" ADD FOREIGN KEY ("seller_id") REFERENCES "users" ("user_id");

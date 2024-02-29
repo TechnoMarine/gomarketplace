@@ -1,21 +1,27 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"github.com/vsouza/go-gin-boilerplate/server"
-	"gomarketplace/config"
-	//"gomarketplace/server"
-	"os"
+	"database/sql"
+	_ "github.com/lib/pq"
+	"gomarketplace/api"
+	db "gomarketplace/db/sqlc"
+	"log"
+)
+
+const (
+	dbDriver      = "postgres"
+	dbSource      = "postgresql://postgres:secret@localhost:12001/gomarketplacedb?sslmode=disable"
+	serverAddress = "0.0.0.0:5000"
 )
 
 func main() {
-	environment := flag.String("e", "development", "")
-	flag.Usage = func() {
-		fmt.Println("Usage: server -e {mode}")
-		os.Exit(1)
+	conn, err := sql.Open(dbDriver, dbSource)
+	if err != nil {
+		log.Fatal("Error connection to db:", err)
 	}
-	flag.Parse()
-	config.Init(*environment)
-	server.Init()
+
+	store := db.NewStore(conn)
+	server := api.NewServer(store)
+
+	err = server.Start(serverAddress)
 }
